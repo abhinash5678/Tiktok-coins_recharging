@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coin Recharge Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+      color: #ff2d55;
+    }
+    input, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    input, select {
+      background-color: #2a2a2a;
+      color: white;
+    }
+    button {
+      background: linear-gradient(90deg, #ff2d55, #ff5e3a);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ff5e3a, #ff2d55);
+    }
+    .hidden {
+      display: none;
+    }
+    .success {
+      text-align: center;
+      color: #00ff99;
+      margin-top: 20px;
+    }
+    .info-msg {
+      text-align: center;
+      color: #cccccc;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="formContainer">
+    <h2>Recharge Coins</h2>
+    <input type="text" id="username" placeholder="Enter TikTok Username" />
+    <select id="coins">
+      <option value="70">70 Coins - $0.99</option>
+      <option value="350">350 Coins - $4.99</option>
+      <option value="700">700 Coins - $9.99</option>
+      <option value="1400">1400 Coins - $19.99</option>
+    </select>
+    <button onclick="processPayment()">Recharge Now</button>
+  </div>  <div class="container hidden" id="successContainer">
+    <h2>Payment Confirmed</h2>
+    <p class="success">Thank you, <span id="displayUser"></span>!</p>
+    <p>You received <strong><span id="displayCoins"></span> coins</strong>.</p>
+    <p>Your demo balance: <strong>$99,999</strong></p>
+    <p class="info-msg">Your coins will be added in approximately <strong>20 minutes</strong>.</p>
+    <button onclick="goBack()">Recharge More</button>
+  </div>  <script>
+    function processPayment() {
+      const user = document.getElementById('username').value;
+      const coins = document.getElementById('coins').value;
+      if (!user) {
+        alert('Please enter a username.');
+        return;
+      }
+      document.getElementById('formContainer').classList.add('hidden');
+      document.getElementById('successContainer').classList.remove('hidden');
+      document.getElementById('displayUser').textContent = user;
+      document.getElementById('displayCoins').textContent = coins;
+    }
+
+    function goBack() {
+      document.getElementById('formContainer').classList.remove('hidden');
+      document.getElementById('successContainer').classList.add('hidden');
+      document.getElementById('username').value = '';
+    }
+  </script></body>
+</html>
